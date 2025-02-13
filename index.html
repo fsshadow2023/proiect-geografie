@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Background with Clickable Buttons</title>
+  <style>
+    /* Reset and basic styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      background-color: #000; /* Fallback color */
+    }
+    /* Container for the background image */
+    #container {
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
+    }
+    /* Background image */
+    #bgImage {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+    /* Transparent buttons */
+    .btn {
+      position: absolute;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      /* Add borders for debugging placement */
+      /* border: 1px dashed red; */
+    }
+    /* Pop-up modal overlay */
+    #overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.5);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+    /* Pop-up box */
+    #modal {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      max-width: 80%;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+    /* Close button inside modal */
+    #modal button {
+      margin-top: 15px;
+      padding: 8px 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <!-- Container for the background image and buttons -->
+  <div id="container">
+    <!-- Set your image URL here -->
+    <img id="bgImage" src="https://i.ibb.co/sptJgyfq/A-large-blank-world-map-with-oceans-marked-in-blue.png" alt="Background">
+    
+    <!-- Seven transparent buttons. Adjust their size and position. -->
+    <button class="btn" style="left: 13%; top: 9%; width: 80px; height: 65px;"
+      onclick="showPopup('America de Nord: Statele Unite ale Americii și Canada beneficiază de resurse ample de apă dulce și infrastructuri avansate, deși anumite regiuni se confruntă cu probleme legate de poluare și secetă')"></button>
+    <button class="btn" style="left: 43%; top: 35%; width: 80px; height: 60px;"
+      onclick="showPopup('Africa: Se confruntă cu probleme majore în asigurarea accesului la apă potabilă, în special în regiunile aride și semi-aride. Infrastructura deficitară și resursele limitate contribuie la dificultăți în furnizarea apei potabile pentru populație.')"></button>
+    <button class="btn" style="left: 45%; top: 10%; width: 50px; height: 50px;"
+      onclick="showPopup('Europa: Majoritatea țărilor europene dispun de infrastructuri bine dezvoltate pentru furnizarea apei potabile. Cu toate acestea, poluarea și gestionarea durabilă a resurselor de apă rămân importante.')"></button>
+    <button class="btn" style="left: 60%; top: 10%; width: 100px; height: 50px;"
+      onclick="showPopup('Asia: Accesul la apă potabilă variază considerabil, cu zone dens populate unde resursele de apă sunt supuse unei presiuni semnificative. Poluarea industrială și agricolă afectează calitatea apei în multe regiuni.')"></button>
+    <button class="btn" style="left: 73%; top: 45%; width: 65px; height: 55px;"
+      onclick="showPopup('Australia: Se confruntă cu provocări legate de secetă și variabilitatea climatică, ceea ce afectează disponibilitatea apei potabile. Gestionarea eficientă a resurselor de apă este esențială pentru a asigura aprovizionarea continuă cu apă sigură.')"></button>
+    <button class="btn" style="left: 27%; top: 46%; width: 25px; height: 70px;"
+      onclick="showPopup('America de Sud: Deține resurse semnificative de apă dulce, în special în bazinul Amazonului. Cu toate acestea, accesul la apă potabilă poate fi limitat în anumite zone rurale și comunități izolate.')"></button>
+    <button class="btn" style="left: 35%; top: 0%; width: 40px; height: 40px;"
+      onclick="showPopup('Groenlanda: Deși are rezerve semnificative de apă dulce sub formă de gheață, accesul la apă potabilă pentru populația locală poate fi limitat din cauza condițiilor climatice extreme și a infrastructurii limitate.')"></button>
+    <button class="btn" style="left: 23%; top: 85%; width: 230px; height: 70px;"
+      onclick="showPopup('Antarctica: Aproximativ 68,7% din apa dulce este stocată în ghețari și calote glaciare, în special în Antarctica și Groenlanda, fiind inaccesibilă pentru consum direct.')"></button>
+  </div>
+
+  <!-- Pop-up overlay and modal -->
+  <div id="overlay" onclick="closePopup()">
+    <div id="modal" onclick="event.stopPropagation()">
+      <p id="modalText">Placeholder text</p>
+      <button onclick="closePopup()">Închide</button>
+    </div>
+  </div>
+
+  <script>
+    // Function to show the pop-up with custom text
+    function showPopup(message) {
+      document.getElementById("modalText").textContent = message;
+      document.getElementById("overlay").style.display = "flex";
+    }
+
+    // Function to close the pop-up
+    function closePopup() {
+      document.getElementById("overlay").style.display = "none";
+    }
+
+    // Handle click on the background (container)
+    document.getElementById("container").addEventListener("click", function(e) {
+      // Ensure it's not a button click
+      if (e.target.id === "container" || e.target.id === "bgImage") {
+        showPopup("Aproximativ 96,5% din totalul apei de pe Pământ se găsește în oceane și mări sub formă de apă sărată, ceea ce o face nepotrivită pentru consumul uman fără procese de desalinizare costisitoare. Doar 3,5% din apa de pe Pământ este apă dulce, din care fac parte gheţari şi calote glaciare (±68,7%), ape subterane (±30,1%) şi ape de suprafaţă şi atmosferice (±1,2%)");
+      }
+    });
+  </script>
+</body>
+</html>
